@@ -1,4 +1,7 @@
+<<<<<<< HEAD
+=======
 main
+>>>>>>> 9a44cc049f6ff6aa00c6f71f8fc1455bdf572466
 function saveToLocalStorage(event) {
     event.preventDefault();
     const Expenseamount = event.target.Expenseamount.value;
@@ -70,6 +73,8 @@ function removeExpensesFromScreen(Descriptions){
   if(childNodeToBeDeleted){
     parentNode.removeChild(childNodeToBeDeleted)
   }
+<<<<<<< HEAD
+=======
 =======
 function saveToLocalStorage(event) {
     event.preventDefault();
@@ -144,4 +149,5 @@ function removeExpensesFromScreen(Descriptions){
   }
   
   master
+>>>>>>> 9a44cc049f6ff6aa00c6f71f8fc1455bdf572466
 }
