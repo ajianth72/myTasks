@@ -25,6 +25,21 @@ function saveToLocalStorage(event) {
     showNewUserOnScreen(obj);
 }
 
+window.addEventListener("DOMContentLoaded", () => {
+    axios.get("https://crudcrud.com/api/99ef6f4b452e4c9b81147ed7c28dcaa0/AppointmentData")
+    .then((response) => {
+        console.log(response)
+
+        for (var i=0; i<response.data.length; i++) {
+            showNewUserOnScreen(response.data[i])
+        }
+    })
+
+    .catch((error) => {
+        console.log(error)
+    })
+})
+
 function showNewUserOnScreen (user) {
 
     document.getElementById('email').value='';
