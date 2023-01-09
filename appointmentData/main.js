@@ -12,7 +12,7 @@ function saveToLocalStorage(event) {
         mobile
     }
 
-    axios.post("https://crudcrud.com/api/99ef6f4b452e4c9b81147ed7c28dcaa0/AppointmentData",obj)
+    axios.post("https://crudcrud.com/api/0aac04640ae84bb8bbd2853d4811dfda/AppointmentData",obj)
         .then((response) => {
             console.log(response)
         })
@@ -26,7 +26,7 @@ function saveToLocalStorage(event) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/99ef6f4b452e4c9b81147ed7c28dcaa0/AppointmentData")
+    axios.get("https://crudcrud.com/api/0aac04640ae84bb8bbd2853d4811dfda/AppointmentData")
     .then((response) => {
         console.log(response)
 
@@ -50,14 +50,14 @@ function showNewUserOnScreen (user) {
     const parentNode = document.getElementById('listOfUsers');
     const childHTML = `<li id=${user._id}> ${user.name} - ${user.email} - ${user.mobile}
         <button onclick=deleteUser('${user._id}')> Delete User </button> 
-        <button onclick=editUser('${user._id}','${user.name}','${user.mobile}')> Edit User </button>
+        <button onclick=editUser('${user.email}','${user.name}','${user.mobile}','${user._id}')> Edit User </button>
         </li>`
 
     parentNode.innerHTML = parentNode.innerHTML+childHTML;
 }
 
 function deleteUser(userId){
-    axios.delete(`https://crudcrud.com/api/99ef6f4b452e4c9b81147ed7c28dcaa0/AppointmentData/${userId}`)
+    axios.delete(`https://crudcrud.com/api/0aac04640ae84bb8bbd2853d4811dfda/AppointmentData/${userId}`)
         .then((response) => {
             removeUserFromScreen(userId)
         })
@@ -74,16 +74,18 @@ function deleteUser(userId){
 function removeUserFromScreen(userId){
     const parentNode = document.getElementById('listOfUsers');
     const childNodeToBeDeleted = document.getElementById(userId);
-
-    parentNode.removeChild(childNodeToBeDeleted)
+    if(childNodeToBeDeleted) {
+        parentNode.removeChild(childNodeToBeDeleted)
+    }
+    
 }
 
-function editUser(emailId, name, mobile) {
+function editUser(emailId, name, mobile, userId) {
     document.getElementById('email').value=emailId;
     document.getElementById('name').value=name;
     document.getElementById('mobile').value=mobile;
 
-    deleteUser(emailId)
+    deleteUser(userId)
 
 }
     
