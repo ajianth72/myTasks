@@ -14,7 +14,7 @@ function saveToLocalStorage(event) {
 
 
 
-    axios.post("https://crudcrud.com/api/f9bf2d3cd62241abbd7811525e9e73f6/OnlineShopping",obj)
+    axios.post("https://crudcrud.com/api/df41dcf6b9c64321ab629b345c0b4206/OnlineShopping",obj)
         .then((response) => {
             console.log(response)
         })
@@ -28,7 +28,7 @@ function saveToLocalStorage(event) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/f9bf2d3cd62241abbd7811525e9e73f6/OnlineShopping")
+    axios.get("https://crudcrud.com/api/df41dcf6b9c64321ab629b345c0b4206/OnlineShopping")
     .then((response) => {
         console.log(response)
 
@@ -53,7 +53,7 @@ function showNewUserOnScreen (user) {
 
         const parentNode = document.getElementById('Electronics');
         const childHTML = `<li id=${user._id}> ${user.name} - ${user.price}
-            <button onclick=deleteUser('${user.category}')> Delete User </button> 
+            <button onclick=deleteUser('${user._id,user.category}')> Delete User </button> 
             </li>`
     
         parentNode.innerHTML = parentNode.innerHTML+childHTML;
@@ -63,7 +63,7 @@ function showNewUserOnScreen (user) {
     else if (user.category==="Food") {
         const parentNode = document.getElementById('Food');
         const childHTML = `<li id=${user._id}> ${user.name} - ${user.price}
-            <button onclick=deleteUser('${user.category}')> Delete User </button> 
+            <button onclick=deleteUser('${user._id,user.category}')> Delete User </button> 
             </li>`
     
         parentNode.innerHTML = parentNode.innerHTML+childHTML;
@@ -72,24 +72,20 @@ function showNewUserOnScreen (user) {
     else {
         const parentNode = document.getElementById('SkinCare');
         const childHTML = `<li id=${user._id}> ${user.name} - ${user.price}
-            <button onclick=deleteUser('${user.category}')> Delete User </button> 
+            <button onclick=deleteUser('${user._id,user.category}')> Delete User </button> 
             </li>`
     
         parentNode.innerHTML = parentNode.innerHTML+childHTML;
 
 
     }
-
-        const childHTML = `<li id=${user._id}> ${user.name} - ${user.price}
-            <button onclick=deleteUser('${user._id}')> Delete User </button> 
-            </li>`
      
 }
 
-function deleteUser(category){
-    axios.delete(`https://crudcrud.com/api/f9bf2d3cd62241abbd7811525e9e73f6/OnlineShopping/${userId}`)
+function deleteUser(userId,category){
+    axios.delete(`https://crudcrud.com/api/df41dcf6b9c64321ab629b345c0b4206/OnlineShopping/${userId}`)
         .then((response) => {
-            removeUserFromScreen(userId)
+            removeUserFromScreen(userId,category)
         })
         .catch((err) => {
             console.log(err)
@@ -101,32 +97,22 @@ function deleteUser(category){
 
 }   
 
-function removeUserFromScreen(category){
-    console.log(userId.category)
-
-    if (obj.category==="Electronics") {
-        const parentNode = document.getElementById('Electronics');
-        const childNodeToBeDeleted = document.getElementById(userId);
-        if(childNodeToBeDeleted) {
-            parentNode.removeChild(childNodeToBeDeleted)
-        }
-
+function removeUserFromScreen(userId,category){
+    if (category==="Electronics") {
+        const parentNode = document.getElementById("Electronics");
     }
 
-    else if (obj.category==="Food") {
-        const parentNode = document.getElementById('Food');
-        const childNodeToBeDeleted = document.getElementById(userId);
-        if(childNodeToBeDeleted) {
-            parentNode.removeChild(childNodeToBeDeleted)
-        }
+    else if (category==="Food") {
+        const parentNode = document.getElementById("Food");
     }
 
     else {
-        const parentNode = document.getElementById('SkinCare');
-        const childNodeToBeDeleted = document.getElementById(userId);
-        if(childNodeToBeDeleted) {
-            parentNode.removeChild(childNodeToBeDeleted)
-        }
+        const parentNode = document.getElementById("SkinCare");
+    }
+    
+    const childNodeToBeDeleted = document.getElementById(userId);
+    if(childNodeToBeDeleted) {
+        parentNode.removeChild(childNodeToBeDeleted)
     }
     
 }
