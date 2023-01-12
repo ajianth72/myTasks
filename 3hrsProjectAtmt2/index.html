@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Online Shopping</title>
+  </head>
+  <body>
+    <section class="container">
+      <form  id="my-form" onsubmit="saveToLocalStorage(event)">
+        <div class="msg"></div>
+          <label for="price">Selling price:</label>
+          <input type="number" id="price">
+  
+          <label for="name">Product Name</label>
+          <input type="text" id="name">
+      
+        <input class="btn" type="submit" value="Add Product">
+      </form>
+    </section>
+
+    <h1>Products:</h1>
+
+    <ul id="listOfProducts"></ul>
+
+    
+
+    <h3 id="TotalPrice"></h3>
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
