@@ -1,4 +1,4 @@
-var total=0;
+let total=0;
 function saveToLocalStorage(event) {
     event.preventDefault();
     const price = event.target.price.value;
@@ -9,32 +9,43 @@ function saveToLocalStorage(event) {
         name,
     }
 
-    axios.post("https://crudcrud.com/api/84e909b05aa34cbba3c9ec6bff0203d0/OnlineShopping",obj)
-        .then((response) => {
+    async function postDetails() {
+        
+        try {
+            const response = await axios.post("https://crudcrud.com/api/2d71730f5ead4d7d8e62c46c7bb60b49/OnlineShopping",obj)
             console.log(response)
-        })
- 
-        .catch((err) => {
-            console.log(err)
-        })
 
-    showNewUserOnScreen(obj);
+            showNewUserOnScreen(obj);
+        }
+
+        catch(err) {
+            console.log(err)
+        }
+    }
+
+    postDetails()
 
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/84e909b05aa34cbba3c9ec6bff0203d0/OnlineShopping")
-    .then((response) => {
-        console.log(response)
 
-        for (var i=0; i<response.data.length; i++) {
-            showNewUserOnScreen(response.data[i])
+    async function getDetails() {
+        
+        try {
+            const response = await axios.get("https://crudcrud.com/api/2d71730f5ead4d7d8e62c46c7bb60b49/OnlineShopping")
+            console.log(response)
+
+            for (let i=0; i<response.data.length; i++) {
+                showNewUserOnScreen(response.data[i])
+            }
         }
-    })
-
-    .catch((error) => {
-        console.log(error)
-    })
+        
+        catch(err) {
+            console.log(err)
+        }
+    }
+    
+    getDetails()
 })
 
 
@@ -59,36 +70,39 @@ function showNewUserOnScreen (user) {
 
 function showTotalPrice(userId,total) {
     const ParentNode = document.getElementById('TotalPrice');
-    const ChildHTML = `<li id=${userId}> <h3>Total Price of Products: Rs${total}</h3>
-        </li>`
+    const ChildHTML = `<h3 id=${userId}> Total Price of Products: Rs ${total}
+        </h3>`
 
     ParentNode.innerHTML = ChildHTML;
 }
 
-function deleteProduct(userId,price){
+function deleteProduct(userId,price) {
 
     total-= price;
     showTotalPrice(userId,total)
 
-    axios.delete(`https://crudcrud.com/api/84e909b05aa34cbba3c9ec6bff0203d0/OnlineShopping/${userId}`)
-        .then((response) => {
-            removeProductFromScreen(userId)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+    async function deleteDetails() {
 
-    // console.log(emailId)
-    // localStorage.removeItem(emailId);
-    // removeUserFromScreen(emailId);
+        try {
+            const response = await axios.delete(`https://crudcrud.com/api/2d71730f5ead4d7d8e62c46c7bb60b49/OnlineShopping/${userId}`)
+            console.log(response)
+            removeProductFromScreen(userId)
+        }
+        catch(error) {
+            console.log(error)
+        }
+    }
+    deleteDetails()
 
 }   
+
 
 function removeProductFromScreen(userId){
 
     const parentNode = document.getElementById("listOfProducts");
    
     const childNodeToBeDeleted = document.getElementById(userId);
+
     if(childNodeToBeDeleted) {
         parentNode.removeChild(childNodeToBeDeleted)
     }
