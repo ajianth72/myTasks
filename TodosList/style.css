@@ -1,0 +1,42 @@
+body {
+    background-image: url(images/e-commerse.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  h1{
+    font: bold;
+  }
+  
+  .todo-form {
+    display: flex;
+    margin-left: 8px;
+  
+  }
+  .space{
+    margin-top: 50px;
+  }
+  
+  .dic {
+    margin-left: 40px;
+  }
+  
+  .todoitem {
+    display: flex;
+    
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 30px;
+  }
+  
+  .todoitem .additem {
+    margin-right: 20px;
+  }
+  
+  .todoitem button {
+    margin-left: 5px;
+  }
+  .buttoniteam{
+    margin-left: 50px;
+  }
